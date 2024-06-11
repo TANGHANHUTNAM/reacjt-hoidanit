@@ -12,7 +12,7 @@ const DisplayInfor = (props) => {
   useEffect(() => {
     if (listUser.length === 0) {
       alert("All user has been deleted");
-    }
+    } 
     console.log("useEffect");
   }, [listUser]);
   return (
