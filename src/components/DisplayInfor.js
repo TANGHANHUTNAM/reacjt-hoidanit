@@ -1,35 +1,6 @@
 import React from "react";
 import "./DisplayInfor.scss";
-import { useState } from "react";
-// class DisplayInfor extends React.Component {
-//   render() {
-//     console.log("render");
-//     const { listUser } = this.props;
-//     return (
-//       <div className="display-infor-container">
-//         {true && (
-//           <>
-//             {listUser.map((user) => {
-//               return (
-//                 <div
-//                   key={user.id}
-//                   className={+user.age > 25 ? "green" : "yellow"}
-//                 >
-//                   <div>My name is: {user.name} </div>
-//                   <div>My age is: {user.age}</div>
-//                   <button onClick={() => this.props.handleDeleteUser(user.id)}>
-//                     Delete
-//                   </button>
-//                   <hr />{" "}
-//                 </div>
-//               );
-//             })}
-//           </>
-//         )}
-//       </div>
-//     );
-//   }
-// }
+import { useState, useEffect } from "react";
 
 const DisplayInfor = (props) => {
   const { listUser } = props;
@@ -37,6 +8,13 @@ const DisplayInfor = (props) => {
   const handleShowHideListUser = () => {
     setShowHideListUser(!isShowHideListUser);
   };
+  console.log("render");
+  useEffect(() => {
+    if (listUser.length === 0) {
+      alert("All user has been deleted");
+    }
+    console.log("useEffect");
+  }, [listUser]);
   return (
     <div className="display-infor-container">
       <div>
