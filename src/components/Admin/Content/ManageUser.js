@@ -1,5 +1,5 @@
 import ModalCreateUser from "./ModalCreateUser";
-
+import "./ManageUser.scss";
 const ManageUser = (props) => {
   return (
     <div className="manage-user-container">
@@ -8,10 +8,8 @@ const ManageUser = (props) => {
         <div>
           <button>Add new user</button>
         </div>
-        <div>
-          Table
-          <ModalCreateUser />
-        </div>
+        <div>Table</div>
+        <ModalCreateUser />
       </div>
     </div>
   );
