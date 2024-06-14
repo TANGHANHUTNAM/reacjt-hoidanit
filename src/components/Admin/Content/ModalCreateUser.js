@@ -68,13 +68,13 @@ const ModalCreateUser = (props) => {
             </div>
             <div className="col-md-4">
               <label className="form-label">Role</label>
-              <select id="inputState" className="form-select">
-                <option
-                  onChange={(event) => setRole(event.target.value)}
-                  value="USER"
-                >
-                  USERS
-                </option>
+              <select
+                id="inputState"
+                className="form-select"
+                onChange={(event) => setRole(event.target.value)}
+                value={role}
+              >
+                <option value="USER">USERS</option>
                 <option value="ADMIN">ADMIN</option>
               </select>
             </div>
