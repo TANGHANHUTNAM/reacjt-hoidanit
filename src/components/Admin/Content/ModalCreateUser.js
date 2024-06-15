@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaRegPlusSquare } from "react-icons/fa";
 import axios from "axios";
+import { toast } from "react-toastify";
 const ModalCreateUser = (props) => {
   const { show, setShow } = props;
   const handleClose = () => {
@@ -31,17 +32,27 @@ const ModalCreateUser = (props) => {
     }
   };
 
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
   const handleSubmitCreateUser = async () => {
     // Validate
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      toast.error("Email is invalid");
+      return;
+    }
+
+    if (!password) {
+      toast.error("Password is required");
+      return;
+    }
     // Call api
-    // let data = {
-    //   email: email,
-    //   password: password,
-    //   username: username,
-    //   role: role,
-    //   userImage: image,
-    // };
-    // console.log(data);
     const data = new FormData();
     data.append("email", email);
     data.append("password", password);
@@ -53,14 +64,19 @@ const ModalCreateUser = (props) => {
       "http://localhost:8081/api/v1/participant",
       data
     );
-    console.log(res);
+    console.log(res.data);
+    if (res.data && res.data.EC === 0) {
+      toast.success("Create user success");
+      handleClose();
+    }
+
+    if (res.data && res.data.EC !== 0) {
+      toast.error(res.data.EM);
+    }
   };
 
   return (
     <>
-      {/* <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button> */}
       <Modal
         show={show}
         onHide={handleClose}
