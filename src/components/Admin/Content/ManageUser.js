@@ -2,6 +2,7 @@ import ModalCreateUser from "./ModalCreateUser";
 import "./ManageUser.scss";
 import { FaRegPlusSquare } from "react-icons/fa";
 import { useState } from "react";
+import TableUser from "./TableUser";
 const ManageUser = (props) => {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
   return (
@@ -17,12 +18,14 @@ const ManageUser = (props) => {
             Add new user
           </button>
         </div>
-        <div className="table-users-container">Table</div>
+        <div className="table-users-container">
+          <TableUser />
+        </div>
         <ModalCreateUser
           show={showModalCreateUser}
           setShow={setShowModalCreateUser}
         />
-      </div>
+      </div> 
     </div>
   );
 };
