@@ -1,19 +1,5 @@
-import { useEffect, useState } from "react";
-// import axios from "axios";
-import { getAllUsers } from "../../../services/apiService";
 const TableUser = (props) => {
-  const [listUsers, setListUsers] = useState([]);
-  useEffect(() => {
-    fetchListUsers();
-  }, []);
-
-  const fetchListUsers = async () => {
-    let res = await getAllUsers();
-    if (res.EC === 0) {
-      setListUsers(res.DT);
-    }
-  };
-
+  const { listUsers } = props;
   return (
     <>
       <table className="table table-hover table-bordered">
@@ -32,7 +18,7 @@ const TableUser = (props) => {
             listUsers.map((user, index) => {
               return (
                 <tr key={`table-users-${index}`}>
-                  <td>{index + 1}</td>
+                  <td>{user.id}</td>
                   <td>{user.username}</td>
                   <td>{user.email}</td>
                   <td>{user.role}</td>

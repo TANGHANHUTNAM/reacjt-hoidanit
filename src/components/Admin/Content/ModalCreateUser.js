@@ -55,10 +55,10 @@ const ModalCreateUser = (props) => {
     }
     // Call api
     let data = await postCreateNewUser(email, password, username, role, image);
-    console.log("components res", data);
     if (data && data.EC === 0) {
       toast.success("Create user success");
       handleClose();
+      await props.fetchListUsers();
     }
 
     if (data && data.EC !== 0) {
