@@ -23,14 +23,24 @@ const TableUser = (props) => {
                   <td>{user.email}</td>
                   <td>{user.role}</td>
                   <td>
-                    <button className="btn btn-primary">View</button>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => props.handleClickBtnView(user)}
+                    >
+                      View
+                    </button>
                     <button
                       onClick={() => props.handleClickBtnUpdate(user)}
                       className="btn btn-warning mx-3"
                     >
                       Update
                     </button>
-                    <button className="btn btn-danger">Delete</button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => props.handleClickBtnDelete(user)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );
