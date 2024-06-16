@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaRegPlusSquare } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { postCreateNewUser } from "../../../services/apiService";
+import { putUpdateUser } from "../../../services/apiService";
 import { useEffect } from "react";
 import _ from "lodash";
 
@@ -16,7 +16,8 @@ const ModalUpdateUser = (props) => {
     setUsername("");
     setImage("");
     setRole("USER");
-    setPreviewImage("");
+    setPreviewImage(""); 
+    props.setDataUpdate({});
   };
 
   const [email, setEmail] = useState("");
@@ -61,13 +62,8 @@ const ModalUpdateUser = (props) => {
       toast.error("Email is invalid");
       return;
     }
-
-    if (!password) {
-      toast.error("Password is required");
-      return;
-    }
     // Call api
-    let data = await postCreateNewUser(email, password, username, role, image);
+    let data = await putUpdateUser(dataUpdate.id, username, role, image);
     if (data && data.EC === 0) {
       toast.success("Create user success");
       handleClose();

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import "react-pro-sidebar/dist/css/styles.css";
 import {
   ProSidebar,
@@ -9,12 +10,12 @@ import {
   SidebarContent,
 } from "react-pro-sidebar";
 import {
-  FaTachometerAlt,
+  // FaTachometerAlt,
   FaGem,
-  FaList,
-  FaGithub,
-  FaRegLaughWink,
-  FaHeart,
+  // FaList,
+  // FaGithub,
+  // FaRegLaughWink,
+  // FaHeart,
 } from "react-icons/fa";
 import sidebarBg from "../../assets/bg2.jpg";
 import { DiReact } from "react-icons/di";
