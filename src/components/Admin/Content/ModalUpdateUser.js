@@ -16,7 +16,7 @@ const ModalUpdateUser = (props) => {
     setUsername("");
     setImage("");
     setRole("USER");
-    setPreviewImage(""); 
+    setPreviewImage("");
     props.setDataUpdate({});
   };
 
@@ -67,7 +67,8 @@ const ModalUpdateUser = (props) => {
     if (data && data.EC === 0) {
       toast.success("Create user success");
       handleClose();
-      await props.fetchListUsers();
+      // await props.fetchListUsers();
+      await props.fetchListUsersWithPaginate(props.currentPage);
     }
 
     if (data && data.EC !== 0) {
