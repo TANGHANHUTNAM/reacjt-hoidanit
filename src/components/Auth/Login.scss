@@ -3,6 +3,12 @@
     height: 45px;
     text-align: right;
     border: 1px solid red;
+    .btn-register {
+      background-color: white;
+      &:hover {
+        background-color: rgb(224, 203, 203);
+      }
+    }
   }
 
   .title {
@@ -23,5 +29,14 @@
     border-radius: 5px;
     color: white;
     background-color: black;
+  }
+
+  .content-form {
+    .back-home {
+      cursor: pointer;
+      &:hover {
+        color: rgb(101, 101, 217);
+      }
+    }
   }
 }

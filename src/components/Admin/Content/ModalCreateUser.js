@@ -117,7 +117,7 @@ const ModalCreateUser = (props) => {
                 onChange={(event) => setRole(event.target.value)}
                 value={role}
               >
-                <option value="USER">USERS</option>
+                <option value="USER">USER</option>
                 <option value="ADMIN">ADMIN</option>
               </select>
             </div>
