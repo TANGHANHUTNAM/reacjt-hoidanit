@@ -5,11 +5,14 @@ import { postLogin } from "../../services/apiService";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
+import { TbFidgetSpinner } from "react-icons/tb";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const validateEmail = (email) => {
     return String(email)
       .toLowerCase()
@@ -29,17 +32,20 @@ const Login = () => {
       toast.error("Password is required");
       return;
     }
+    setIsLoading(true);
     //submit api
     let data = await postLogin(email, password);
 
     if (data && +data.EC === 0) {
       dispatch(doLogin(data));
       toast.success(data.EM);
+      setIsLoading(false);
       navigate("/");
     }
 
     if (data && +data.EC !== 0) {
       toast.error(data.EM);
+      setIsLoading(false);
     }
   };
   return (
@@ -79,8 +85,15 @@ const Login = () => {
         <div>
           <span className="forgot-password">Forgot password?</span>
           <div>
-            <button className="btn-login w-100" onClick={() => handleLogin()}>
-              Login
+            <button
+              className="btn-login w-100"
+              onClick={() => handleLogin()}
+              disabled={isLoading}
+            >
+              {isLoading === true && (
+                <TbFidgetSpinner className="loader-icon" />
+              )}
+              <span>Login</span>
             </button>
           </div>
           <div className="back-home text-center pointer">

@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "nprogress/nprogress.css";
 import Layout from "./Layout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
