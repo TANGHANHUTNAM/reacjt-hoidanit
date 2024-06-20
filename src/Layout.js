@@ -9,6 +9,10 @@ import Login from "./components/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import SignUp from "./components/Auth/SignUp";
 import ListQuiz from "./components/User/ListQuiz";
+import DetailQuiz from "./components/User/DetailQuiz";
+const NotFound = () => {
+  return <div className="alert alert-danger text-center">404 Not Found</div>;
+};
 const Layout = (props) => {
   return (
     <>
@@ -17,12 +21,14 @@ const Layout = (props) => {
           <Route index element={<HomePage />} />
           <Route path="users" element={<ListQuiz />} />
         </Route>
+        <Route path="/quiz/:id" element={<DetailQuiz />} />
         <Route path="admins" element={<Admin />}>
           <Route index element={<DashBoard />} />
           <Route path="manage-users" element={<ManageUser />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer
         position="top-right"
