@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -7,7 +8,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const isAuthencated = useSelector((state) => state.user.isAuthencated);
-  const account = useSelector((state) => state.user.account);
+
   const navigate = useNavigate();
   const handleLogin = () => {
     navigate("/login");
