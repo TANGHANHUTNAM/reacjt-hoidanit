@@ -1,44 +1,44 @@
-import { toast } from "react-toastify";
-import { postCreateNewQuiz } from "../../../../services/apiService";
 import "./ManageQuiz.scss";
-import { useState } from "react";
 import Select from "react-select";
+import { useState } from "react";
+import { postCreateNewQuiz } from "../../../../services/apiService";
+import { toast } from "react-toastify";
 import TableQuiz from "./TableQuiz";
 import Accordion from "react-bootstrap/Accordion";
+
 const options = [
   { value: "EASY", label: "EASY" },
   { value: "MEDIUM", label: "MEDIUM" },
   { value: "HARD", label: "HARD" },
 ];
-const ManageQuiz = () => {
+
+const ManageQuiz = (props) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [image, setImage] = useState(null);
-  const handleChangFile = (event) => {
+
+  const handleChangeFile = (event) => {
     if (event.target && event.target.files && event.target.files[0]) {
       setImage(event.target.files[0]);
     }
   };
+
   const handleSubmitQuiz = async () => {
-    // validate
-    if (!name || !description || !type) {
-      toast.error("Name/description/typeQuiz are required");
+    //validate
+    if (!name || !description) {
+      toast.error("Name/Description is required");
       return;
     }
+
     let res = await postCreateNewQuiz(description, name, type?.value, image);
     if (res && res.EC === 0) {
       toast.success(res.EM);
       setName("");
       setDescription("");
-      setType("");
       setImage(null);
     } else {
       toast.error(res.EM);
-      setName("");
-      setDescription("");
-      setImage(null);
-      setType("");
     }
   };
   return (
@@ -54,10 +54,9 @@ const ManageQuiz = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="floatingInput"
                     placeholder="your quiz name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(event) => setName(event.target.value)}
                   />
                   <label>Name</label>
                 </div>
@@ -65,10 +64,9 @@ const ManageQuiz = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="floatingPassword"
-                    placeholder="Description"
+                    placeholder="description..."
                     value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={(event) => setDescription(event.target.value)}
                   />
                   <label>Description</label>
                 </div>
@@ -80,26 +78,28 @@ const ManageQuiz = () => {
                     placeholder={"Quiz type..."}
                   />
                 </div>
-                <div className="more-actions">
-                  <label className="mb-2">Upload image</label>
+                <div className="more-actions form-group">
+                  <label className="mb-1"> Upload Image</label>
                   <input
                     type="file"
                     className="form-control"
-                    onChange={(e) => handleChangFile(e)}
+                    onChange={(event) => handleChangeFile(event)}
                   />
                 </div>
-                <div
-                  className="btn btn-primary mt-3"
-                  onClick={() => handleSubmitQuiz()}
-                >
-                  Save
+                <div className="mt-3">
+                  <button
+                    onClick={() => handleSubmitQuiz()}
+                    className="btn btn-warning"
+                  >
+                    Save
+                  </button>
                 </div>
               </fieldset>
             </div>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-      <div className="list-detail ">
+      <div className="list-detail">
         <TableQuiz />
       </div>
     </div>
