@@ -3,8 +3,6 @@ const Question = (props) => {
   const { data, index } = props;
   if (_.isEmpty(data)) return <></>;
   const handleCheckbox = (event, aId, qId) => {
-    // console.log(event.target.checked);
-    console.log("data", data, aId, qId);
     props.handleCheckbox(aId, qId);
   };
   return (
