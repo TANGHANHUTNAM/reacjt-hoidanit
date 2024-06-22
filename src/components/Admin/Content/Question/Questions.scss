@@ -9,24 +9,27 @@
 
   .question-content {
     gap: 25px;
+    align-items: center;
     .description {
       width: 50%;
     }
     .group-upload {
-      padding-top: 15px;
-      .label-upload {
-        height: 30px;
-        border: 1px solid #d9d9d9;
-        padding: 0 10px;
-        margin-right: 5px;
+      .icon-upload {
+        font-size: 35px;
         cursor: pointer;
+        color: rgb(157, 80, 154);
+        margin-right: 15px;
+      }
+      &:hover {
+        .icon-upload {
+          color: rgb(221, 16, 214);
+        }
       }
     }
 
     .btn-add {
-      padding-top: 15px;
       .icon-add {
-        font-size: 30px;
+        font-size: 34px;
         cursor: pointer;
         color: green;
       }
@@ -50,12 +53,12 @@
     }
 
     .answer-name {
-      width: 48%;
+      width: 55%;
     }
 
     .btn-group {
       .icon-add {
-        font-size: 30px;
+        font-size: 34px;
         cursor: pointer;
         color: green;
       }
