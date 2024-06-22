@@ -15,8 +15,9 @@ import {
   postCreateNewAnswerForQuestion,
   postCreateNewQuestionForQuiz,
 } from "../../../../services/apiService";
+import { toast } from "react-toastify";
 const Questions = () => {
-  const [questions, setQuestions] = useState([
+  const initQuestion = [
     {
       id: uuidv4(),
       description: "",
@@ -30,7 +31,8 @@ const Questions = () => {
         },
       ],
     },
-  ]);
+  ];
+  const [questions, setQuestions] = useState(initQuestion);
   const [isPreviewImage, setIsPreviewImage] = useState(false);
   const [dataImagePreview, setDataImagePreview] = useState({
     title: "",
@@ -145,29 +147,64 @@ const Questions = () => {
   };
 
   const handleSubmitQuestionForQuiz = async () => {
-    // validate
+    // validate selected quiz
+    if (_.isEmpty(selectedQuiz)) {
+      return toast.error("Please select quiz");
+    }
+    // validate question
+    for (let i = 0; i < questions.length; i++) {
+      if (questions[i].description === "") {
+        return toast.error(`Please input question ${i + 1}`);
+      }
+    }
+    // validate answer
+    for (let i = 0; i < questions.length; i++) {
+      let isValid = true;
+      for (let j = 0; j < questions[i].answers.length; j++) {
+        if (questions[i].answers[j].description === "") {
+          isValid = false;
+          return toast.error(
+            `Please input answer for question ${i + 1}, answer ${j + 1}`
+          );
+        }
+      }
+      if (!isValid) {
+        break;
+      }
+    }
+    // validate answer correct
+    for (let i = 0; i < questions.length; i++) {
+      let isValid = false;
+      for (let j = 0; j < questions[i].answers.length; j++) {
+        if (questions[i].answers[j].isCorrect === true) {
+          isValid = true;
+          break;
+        }
+      }
+      if (!isValid) {
+        return toast.error(
+          `Please select correct answer for question ${i + 1}`
+        );
+      }
+    }
 
     // submit questions
-    await Promise.all(
-      questions.map(async (question) => {
-        const q = await postCreateNewQuestionForQuiz(
-          +selectedQuiz.value,
-          question.description,
-          question.imageFile
+    for (const question of questions) {
+      const q = await postCreateNewQuestionForQuiz(
+        +selectedQuiz.value,
+        question.description,
+        question.imageFile
+      );
+      for (const answer of question.answers) {
+        await postCreateNewAnswerForQuestion(
+          answer.description,
+          answer.isCorrect,
+          q.DT.id
         );
-        // submit answer
-        await Promise.all(
-          question.answers.map(async (answer) => {
-            await postCreateNewAnswerForQuestion(
-              answer.description,
-              answer.correct_answer,
-              q.DT.id
-            );
-          })
-        );
-        console.log("check Q", q);
-      })
-    );
+      }
+    }
+    toast.success("Create question and answer success");
+    setQuestions(initQuestion);
   };
 
   const handlePreviewImage = (questionId) => {
