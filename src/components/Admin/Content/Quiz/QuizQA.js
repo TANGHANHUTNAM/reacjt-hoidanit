@@ -7,14 +7,13 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { MdOutlineAddToPhotos } from "react-icons/md";
 import { RiImageAddFill } from "react-icons/ri";
 import { v4 as uuidv4 } from "uuid";
-import _, { set } from "lodash";
+import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
 import { useEffect } from "react";
 import {
   getAllQuizForAdmin,
-  postCreateNewAnswerForQuestion,
-  postCreateNewQuestionForQuiz,
   getQuizWithQA,
+  postUpsertQA,
 } from "../../../../services/apiService";
 import { toast } from "react-toastify";
 const QuizQA = () => {
@@ -67,12 +66,6 @@ const QuizQA = () => {
       .then((buf) => new File([buf], filename, { type: mimeType }));
   }
 
-  //Usage example:
-  // urltoFile("data:text/plain;base64,aGVsbG8=", "hello.txt", "text/plain").then(
-  //   function (file) {
-  //     console.log(file);
-  //   }
-  // );
   const fetchQuizWithQA = async () => {
     let res = await getQuizWithQA(selectedQuiz.value);
     if (res && res.EC === 0) {
@@ -94,6 +87,7 @@ const QuizQA = () => {
       setQuestions(newQA);
     }
   };
+
   const fetchQuiz = async () => {
     let res = await getAllQuizForAdmin();
     if (res && res.EC === 0) {
@@ -239,23 +233,29 @@ const QuizQA = () => {
     }
 
     // submit questions
-    for (const question of questions) {
-      const q = await postCreateNewQuestionForQuiz(
-        +selectedQuiz.value,
-        question.description,
-        question.imageFile
-      );
-      for (const answer of question.answers) {
-        await postCreateNewAnswerForQuestion(
-          answer.description,
-          answer.isCorrect,
-          q.DT.id
-        );
+    let questionClone = _.cloneDeep(questions);
+    for (let i = 0; i < questionClone.length; i++) {
+      if (questionClone[i].imageFile) {
+        questionClone[i].imageFile = await toBase64(questionClone[i].imageFile);
       }
     }
-    toast.success("Create question and answer success");
-    setQuestions(initQuestion);
+    let res = await postUpsertQA({
+      quizId: selectedQuiz.value,
+      questions: questionClone,
+    });
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+      fetchQuizWithQA();
+    }
   };
+
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+    });
 
   const handlePreviewImage = (questionId) => {
     let questionClone = _.cloneDeep(questions);
