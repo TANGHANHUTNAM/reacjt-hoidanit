@@ -5,7 +5,7 @@ import _ from "lodash";
 import "./DetailQuiz.scss";
 import Question from "./Question";
 import ModalResult from "./ModalResult";
-import { set } from "nprogress";
+
 const DetailQuiz = (props) => {
   const params = useParams();
   const quizId = params.id;
@@ -17,6 +17,7 @@ const DetailQuiz = (props) => {
   useEffect(() => {
     fetchQuestion();
   }, [quizId]);
+
   const fetchQuestion = async () => {
     let res = await getDataQuiz(quizId);
     if (res && res.EC === 0) {
