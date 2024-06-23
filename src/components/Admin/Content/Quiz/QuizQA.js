@@ -1,6 +1,6 @@
 import Select from "react-select";
 import { useState } from "react";
-import "./Questions.scss";
+import "./QuizQA.scss";
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import { FaRegMinusSquare } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -16,7 +16,7 @@ import {
   postCreateNewQuestionForQuiz,
 } from "../../../../services/apiService";
 import { toast } from "react-toastify";
-const Questions = () => {
+const QuizQA = () => {
   const initQuestion = [
     {
       id: uuidv4(),
@@ -221,7 +221,6 @@ const Questions = () => {
 
   return (
     <div className="question-container">
-      <div className="title">Manage Question</div>
       <div className="add-new-question">
         <div className="col-6 form-group">
           <label className="mb-2">Select Quiz:</label>
@@ -375,4 +374,4 @@ const Questions = () => {
   );
 };
 
-export default Questions;
+export default QuizQA;
