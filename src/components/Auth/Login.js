@@ -48,6 +48,10 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+
+  const handleEnterLogin = (e) => {
+    if (e && e.key === "Enter") handleLogin();
+  };
   return (
     <div className="login-container">
       <div className="header pe-5 pt-1">
@@ -80,6 +84,7 @@ const Login = () => {
             className="form-control"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
+            onKeyDown={(e) => handleEnterLogin(e)}
           />
         </div>
         <div>
