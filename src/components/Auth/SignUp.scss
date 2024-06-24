@@ -1,7 +1,10 @@
 .signup-container {
   .header {
     height: 45px;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
     .btn-login {
       background-color: white;
       &:hover {

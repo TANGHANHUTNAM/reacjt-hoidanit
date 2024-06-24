@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { postSignUp } from "../../services/apiService";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+import Language from "../Header/Language";
 const SignUp = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -57,6 +58,7 @@ const SignUp = (props) => {
         >
           Log in
         </button>
+        <Language />
       </div>
       <div className="title col-4 mx-auto text-center">HoiDanIT</div>
       <div className="welcome col-4 mx-auto text-center">

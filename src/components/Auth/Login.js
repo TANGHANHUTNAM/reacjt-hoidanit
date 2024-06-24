@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
 import { TbFidgetSpinner } from "react-icons/tb";
+import Language from "../Header/Language";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -62,6 +63,7 @@ const Login = () => {
         >
           Sign up
         </button>
+        <Language />
       </div>
       <div className="title col-4 mx-auto text-center">HoiDanIT</div>
       <div className="welcome col-4 mx-auto text-center">
