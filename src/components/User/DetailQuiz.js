@@ -39,6 +39,7 @@ const DetailQuiz = (props) => {
             item.answers.isSelected = false;
             answers.push(item.answers);
           });
+          answers = _.orderBy(answers, ["id"], ["asc"]);
           return { questionId: key, answers, questionDescription, image };
         })
         .value();
@@ -72,7 +73,6 @@ const DetailQuiz = (props) => {
   };
 
   const handleFinish = async () => {
-    console.log("dataQuiz", dataQuiz);
     let payload = {
       quizId: +quizId,
       answers: [],
@@ -133,7 +133,11 @@ const DetailQuiz = (props) => {
         </div>
       </div>
       <div className="right-content">
-        <RightContent dataQuiz={dataQuiz} handleFinish={handleFinish} setIndex={setIndex} />
+        <RightContent
+          dataQuiz={dataQuiz}
+          handleFinish={handleFinish}
+          setIndex={setIndex}
+        />
       </div>
       <ModalResult
         show={isShowModalResult}

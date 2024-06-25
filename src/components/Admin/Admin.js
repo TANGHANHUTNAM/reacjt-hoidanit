@@ -6,6 +6,8 @@ import { Outlet } from "react-router-dom";
 import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import Language from "../Header/Language";
+import { NavDropdown } from "react-bootstrap";
 
 const Admin = (props) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -17,7 +19,16 @@ const Admin = (props) => {
       </div>
       <div className="admin-content">
         <div className="admin-header">
-          <FaBars onClick={() => setCollapsed(!collapsed)} />
+          <span className="left-side" onClick={() => setCollapsed(!collapsed)}>
+            <FaBars />
+          </span>
+          <div className="right-side">
+            <NavDropdown title="Setting" id="basic-nav-dropdown">
+              <NavDropdown.Item>Profile</NavDropdown.Item>
+              <NavDropdown.Item>Log out</NavDropdown.Item>
+            </NavDropdown>
+            <Language />
+          </div>
         </div>
 
         <div className="admin-main">
