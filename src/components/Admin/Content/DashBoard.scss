@@ -3,27 +3,35 @@
   .title {
     font-size: 25px;
     font-weight: 600;
+    margin-bottom: 20px;
   }
   .content {
     display: flex;
-    height: 80vh;
+    height: 60vh;
+    gap: 20px;
     .content-left {
       display: flex;
       width: 50%;
-      border: 1px solid #d70a0a;
       flex-wrap: wrap;
+      gap: 20px;
       .child {
-        width: 50%;
-        height: 50%;
+        width: calc(50% - 10px);
+        height: calc(50% - 10px);
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+        border-radius: 10px;
+        border: 1px solid #838483;
+        .text-2 {
+          font-size: 24px;
+          font-weight: 600;
+        }
       }
     }
 
     .content-right {
       width: 50%;
-      border: 1px solid #14d70a;
     }
   }
 }
