@@ -1,8 +1,16 @@
+.detail-quiz-new-header {
+  padding: 15px 60px;
+  font-size: 25px;
+  color: rgb(149, 215, 226);
+  a {
+    text-decoration: none !important;
+  }
+}
 .detail-quiz-container {
   display: flex;
   gap: 20px;
-  padding: 50px;
-  height: 100vh;
+  padding: 0px 50px;
+  height: 80vh;
   .left-content {
     width: 70%;
     border: 2px solid #ccc;
