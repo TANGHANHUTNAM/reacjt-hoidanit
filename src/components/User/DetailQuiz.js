@@ -7,7 +7,8 @@ import Question from "./Question";
 import ModalResult from "./ModalResult";
 import RightContent from "./RightContent/RightContent";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { BreadcrumbItem, NavLink } from "react-bootstrap";
+import { BreadcrumbItem } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 const DetailQuiz = (props) => {
   const params = useParams();
   const quizId = params.id;
