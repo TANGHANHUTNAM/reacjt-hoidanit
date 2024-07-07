@@ -1,0 +1,65 @@
+.login-container {
+  .loader-icon {
+    margin-right: 10px;
+    animation: spin 1s infinite linear;
+    font-size: 20px;
+    color: cadetblue;
+  }
+
+  @keyframes spin {
+    from {
+      transform: scale(1) rotate(0deg);
+    }
+    to {
+      transform: scale(1) rotate(360deg);
+    }
+  }
+
+  .header {
+    height: 45px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    .btn-register {
+      background-color: white;
+      &:hover {
+        background-color: rgb(224, 203, 203);
+      }
+    }
+  }
+
+  .title {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 20px 0;
+  }
+
+  .welcome {
+    font-size: 20px;
+    padding: 10px 0;
+  }
+
+  .btn-login {
+    height: 50px;
+    border: none;
+    margin: 20px 0;
+    border-radius: 5px;
+    color: white;
+    background-color: black;
+    &:disabled {
+      background-color: #dddddd !important;
+      color: #afafaf !important;
+      cursor: no-drop;
+    }
+  }
+
+  .content-form {
+    .back-home {
+      cursor: pointer;
+      &:hover {
+        color: rgb(101, 101, 217);
+      }
+    }
+  }
+}
